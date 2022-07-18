@@ -1,8 +1,3 @@
-﻿////using CarInsurance3.Models;
-////using System.Data.Entity;
-////using System.Linq;
-/////using System.Net;
-////using System.Web.Mvc;
 using System;
 using System.Collections.Generic;
 
@@ -104,11 +99,6 @@ namespace CarInsurance3.Controllers
             return View(insuree);
         }
 
-        private decimal insQuote(Insuree insuree)
-        {
-            throw new NotImplementedException();
-        }
-
         // GET: Insuree/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -142,6 +132,51 @@ namespace CarInsurance3.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        
+        insuree.Quote = 50.0m;
+
+            if (DateTime.Now.Year - insuree.DateOfBirth.Year < 18)
+            {
+                insuree.Quote += 100;
+            }
+            if (DateTime.Now.Year - insuree.DateOfBirth.Year > 18 && DateTime.Now.Year - insuree.DateOfBirth.Year < 25)
+            {
+                insuree.Quote += 25;
+            }
+            if (DateTime.Now.Year - insuree.DateOfBirth.Year > 100)
+            {
+                insuree.Quote += 25;
+            }
+            if (Convert.ToInt32(insuree.CarYear) < 2000)
+            {
+                insuree.Quote += 25;
+            }
+            if (Convert.ToInt32(insuree.CarYear) > 2015)
+            {
+                insuree.Quote += 25;
+            }
+            if (insuree.CarMake == "Porsche")
+            {
+                insuree.Quote += 25;
+            }
+            if (insuree.CarMake == "Porsche" && insuree.CarModel == "911 Carrera")
+            {
+                insuree.Quote += 25;
+            }
+            for (int i = 0; i < insuree.SpeedingTickets; i++)
+            {
+                insuree.Quote += 10;
+            }
+            if (insuree.DUI == true)
+            {
+                insuree.Quote *= 1.25m;
+            }
+            if (insuree.CoverageType == true)
+            {
+                insuree.Quote *= 1.50m;
+            }
+            return insuree.Quote;
         }
     }
 }
