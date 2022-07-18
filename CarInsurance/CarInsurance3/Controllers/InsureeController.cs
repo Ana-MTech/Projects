@@ -133,6 +133,8 @@ namespace CarInsurance3.Controllers
             base.Dispose(disposing);
         }
         
+        public decimal CalculateQuote(Insuree insuree)
+        {       
         insuree.Quote = 50.0m;
 
             if (DateTime.Now.Year - insuree.DateOfBirth.Year < 18)
