@@ -57,7 +57,7 @@ namespace CarInsurance3.Controllers
         {
             if (ModelState.IsValid)
             {
-                insuree.Quote = insQuote(insuree);
+                insuree.Quote = CalculateQuote(insuree);
                 db.Insurees.Add(insuree);
                 db.SaveChanges();
                 return RedirectToAction("Admin");
@@ -90,7 +90,7 @@ namespace CarInsurance3.Controllers
         {
             if (ModelState.IsValid)
             {
-                insuree.Quote = insQuote(insuree);
+                insuree.Quote = CalculateQuote(insuree);
                 db.Entry(insuree).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Admin");
